@@ -17,10 +17,10 @@ Es el más presente en la mayoría de lenguajes. En JavaScript nos encontramos c
  * Un aumento del valor de la variable: (_i++_).  
 Así, la forma de invocar el bucle *for* quedaría de la siguiente manera:  
 ```
-*for (var i = 0; i < 10; i++){*        //Se puede realizar en sentido inverso, fijando un tope, condicionando con el 0 y reduciendo el valor de _i_:(_var i = 10; i > 0; i--_)
+for (var i = 0; i < 10; i++){       //Se puede realizar en sentido inverso, fijando un tope, condicionando con el 0 y reduciendo el valor de _i_:(_var i = 10; i > 0; i--_)
     //Código que se ejecuta 10 veces.
     //Se para cuando _i_ alcanza el valor de 10.
-*}* 
+}
 
 ```
 
@@ -65,9 +65,9 @@ El bucle *while* nos introduce en otra forma de iterar elementos mediante una co
   * Una variable que resulte _true_ hasta que su valor cambie a _false_.  
 Así, la forma de invocar el bucle *while* quedaría de la siguiente manera:  
 ```
-*while (condición) {*
+while (condición) {
   //Código que se ejecuta las veces que se cumpla la condición.
-*}*
+}
 
 ```
 
@@ -96,9 +96,9 @@ El bucle *do-while* es similar al bucle *while*, pero añade la ejecución de al
   * Una variable que resulte _true_ hasta que su valor cambie a _false_.  
 Se representaría de la siguiente forma.  
 ```
-*do {*
+do {
   //Código que se ejecuta las veces que se cumpla la condición, pero al menos una vez.
-*} while (condición)*
+} while (condición)
 
 ```
 
