@@ -78,7 +78,7 @@ var diaFestivoEncontrado = false;   //Definimos la variable del bucle. Iniciada 
 var i = 0;                          //Creamos otra variable indice para recorrer el _array_. 
 
 while (!diaFestivoEncontrado) {     //Entramos en el bucle hasta que sea festivo, en nuestro caso, 'Sunday'.
-  if(week[i] === 'Sunday'){         //Si lo es, no lo imprimimos y cambiamos la variable a true para salir del bucle en la siguiente iteración.
+  if(week[i] === "Sunday"){         //Si lo es, no lo imprimimos y cambiamos la variable a true para salir del bucle en la siguiente iteración.
     diaFestivoEncontrado = true;
   }else{          
     console.log(week[i]);           //Imprime días de la semana laborales.
