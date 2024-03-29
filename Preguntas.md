@@ -73,7 +73,7 @@ while (condición) {
 
 En este punto, recordemos que cuando definimos un bucle *for*, sabemos que hay un número de elementos concreto y ése será el número de iteraciones. Cuando usamos un bucle *while* también podemos indicar que el bucle sea de un número determinado mediante una condición aritmética controlada. Si decimos que el bucle *while* se ejecute desde _i = 0_ hasta _i < 7_, tendremos también un control. ¿Pero qué ocurre si tenemos que ejecutar un bucle hasta una señal concreta y no el array completo? En este caso no sabemos cuándo parará, pero si podemos conseguir que lo haga.   
 
-´´´
+```
 var diaFestivoEncontrado = false;   //Definimos la variable del bucle. Iniciada en _false_ pero usada con el transformador *not* en la condición para que resulte _true_.
 var i = 0;                          //Creamos otra variable indice para recorrer el _array_. 
 
@@ -85,7 +85,7 @@ while (!diaFestivoEncontrado) {     //Entramos en el bucle hasta que sea festivo
     i++;
   }
 }
-´´´
+```
 
 #### El bucle *DO-WHILE*:  
 El bucle *do-while* es similar al bucle *while*, pero añade la ejecución de al menos una vez y realiza la condición al final. Resulta muy útil cuando queremos realizar *una* petición al menos, como por ejemplo, confirmar la contraseña de un usuario. Se ejecuta la solicitud una vez, si es la clave correcta, sale del bucle; si no lo es, la vuelve a pedir.   
