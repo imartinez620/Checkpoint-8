@@ -218,8 +218,37 @@ objeto.decirHolaArrow();    // Output: Hola, soy undefined
 ```
 
 ## ¿Qué es la deconstrucción de variables?
+Es una expresión en JavaScript que nos permite desempaquetar _arrays_ y objetos en diferentes variables.  
+Centrémonos en los _arrays_, si tenemos un _array_ controlado, que sepamos su tamaño, por ejmplo de tres elementos, con la siguiente expresión podríamos asignar cada uno a una variable diferente:
+```
+const miArray = [1, 2, 3];
+const [a, b, c] = miArray;
+```
+Ahora, si queremos hacer los mismo con un array del que no sepamos su tamaño, siempre podemos asignar una cantidad de elementos a variables concretas, y el resto del _array_ a otra variable precedida de (...).
+```
+const [a, b, ...rest] = [1,2,3,4,5];
+```
+Otra opción que tenemos es la de ignorar ciertos elementos, para ello sólo hay que dejar el elemento vacío en las variables asignadas, en vez de utilizar const [a,b,c], podemos anular el elemento del medio con [a, ,c].  
+Si queremos trabajar con objetos, tembién podremos deconstruirlos. El formato es muy similar al anterior, teniendo el siguiente obejo:
+```
+const tom = {
+  name: 'Peter',
+  surname: 'Parker',
+  heroe: 'Spider-man'
+};
+```
+Haríamos su deconstrucción así:
+```
+const { name, surname, heroe } = tom;
+```
 
-
+Una de las ventajas que nos ofrece la deconstrucción, es que podemos realizar intercambio de variables sin ncesidad de usar una variable temporal extra, y evitar también problemas de asignaciones erróneas.   
+```
+let jugadorUno = 'Cíclope';
+let jugadorDos = 'Batman';
+[jugadorUno, jugadorDos] = [jugadorDos, jugadorUno];
+```
+Son este ejemplo, somos capaces de intercambiar los valores de dos variables en una sola línea con un simple intercambio de orden.
 
 ## ¿Qué hace el operador de extensión en JS?
 
