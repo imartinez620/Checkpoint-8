@@ -113,10 +113,65 @@ do {                            //Entra al bucle.
 Si  en este caso hubiésemos iniciado la variable en un número mayor igual a 10, tendríamos la certeza de que al menos se ejecuta una vez la impresión en consola, porque la confirmación sería después.
 
 
-
-
-
 ## ¿Cuáles son las diferencias entre const, let y var?
+
+Se trata de palabras reservadas que se utilizan para definir una variable, y una variable es un 'contenedor' al que podemos asignarle un valor. De la forma que crear una variable es tan sencillo como los siguientes ejemplos.
+```
+var miNombre = 'Peter';
+let miEdad = 18;
+const miHeroe = 'Spider-man';
+```
+
+La principal diferencia entre estas opciones hace referencia al ámbito y a la capacidad que tendrá la variable de ser reasignada. Esto quiere decir, en qué partes del código serán accesibles tanto para leer su valor como para cambiarlo. Así pues, haremos dos grandes distinciones, ámbito global y local. Si hablamos de un ámbito global, la variable será accesible desde todo el código de la clase, mientras que si usamos un ámbito local, sólo será accesible en el bloque de código donde está declarada.  
+
+Teniendo claro estos conceptos, vamos a ver cada caso:
+* *var*
+ Fueron las primeras en ser utilizadas y tienen ámbito de función, por lo que no pueden accederse en ámbito global las declaradas dentro de una función. El problema es que tienen la posibilidad declararse repetidamente, lo que generaba valores inesperados cuando se ejecutaba el código si la declaras otra vez dentro de un bloque y accedes a ella fuera de él.
+ ```
+var x = 'Peter';
+{
+  var x = 'Parker';
+}
+console.log(x); // Devuelve 'Parker'
+ ``` 
+También permiten lo que se conoce como _hoisting_, que pueden ser usadas antes de ser declaradas.
+ ```
+console.log(x); 
+var x = 'Peter';
+ ``` 
+ Se entiende de la siguiente forma:
+ ```
+var x;
+console.log(x); 
+x = 'Peter';
+ ```  
+
+* *let*
+Son de ámbito de bloque {} y añadieron la restricción de no poder ser declaradas más que una vez en dicho ámbito, aunque sí reasignadas. Nos da de esta forma un mayor control para no obtener valores sorpresa.  
+No soportan inicialización en el _hoisting_.
+
+```
+let x = 'Peter';
+{
+  let x = 'Parker';   //Al estar en diferente ámbito, no da error.
+  console.log(x);     // Devuelve 'Parker'
+}
+console.log(x);       // Devuelve 'Peter'
+```
+
+* *const*
+Son la forma más restrictiva de declarar variables. A las características de las *let*, les añade la imposibilidad de reasignar un valor a la variable, son constantes en su valor de declaración. Este valor tiene que ser asignado al crearlas. Estas dos opciones darían fallo:
+```
+const x = 'Peter';
+const x = 'Parker';   //Da error.
+x = 'Parker';         //Da error.
+console.log(x);      // Devuelve 'Parker'
+```
+
+En resumen, si la mejor práctica siempre que sea posible es la de utilizar *const* al declarar variables.  
+Si necesitas reasignarlas, lo recomendable sería *let*.  
+No se recomienda el uso de *var* por los problemas asociados a sus reasignaciones.
+
 
 ## ¿Qué es una función de flecha?
 
