@@ -1,8 +1,3 @@
-Buenas tardes Iñaki, felicidades por haber llegado al CheckPoint 8, te comento lo que vas a realizar... Este checkpoint sera el ultimo donde pediremos que creen una documentación sobre lo conceptos que te proporcionare, recuerda debes ser lo más claro y comprensible posible, estas creando un material que lo visualizarán personas que recién inician en el mundo del desarrollo por lo tanto debes también sustentarlo con ejemplos, porque se utiliza, para que se utiliza, sintaxis, etc… Necesito que esta documentación sea la más completa que has creado, utilizando un buen formato, con imágenes, buenos ejemplos, y muy importante que tenga mucha información, necesito que sea lo más completa posible!! Y ademas que no sea creada en PDF o Word, necesito exploren otras alternativas como crear documentacion en un archivo con lenguaje MarkDown, utilizar Wiki de Git-Hub, Git Books, una pagina HTML, etc… ya les he dado muchas pistas!! Quiero algo diferente!
-
-Los conceptos son los siguientes:
-ejemplos, porque se utiliza, para que se utiliza, sintaxis, etc
-
 ## ¿Qué tipo de bucles hay en JS?
 
 Los bucles son una de las estructuras más utilizadas en programación. Su uso es útil para la repetición de un bloque código siempre que cumplan una condición o que se indique una determinada cantidad de iteraciones (repeticiones), otro uso es utilizarlos para recorrer arrays.
@@ -285,6 +280,8 @@ console.log(suma(...operandos));
 
 ## ¿Qué es la programación orientada a objetos?
 Es un paradigma que se basa en la creación de objetos que tendrán unas propiedas o datos del objeto, y unas funciones o comportamientos. En las primeras versiones de JavaScript no se seguía este paradigma, pero fue incluido posteriormente. De forma sencilla, su sistema se basa en unas plantillas llamadas clases, que definen los puntos mencionados, y en un concepto llamado instancia, que se basa en contruir el objeto conforme a la clase. Proceso en el que es típico poder darle valores en su constructor, y que luego admitirá manejarlo según su comportamiento.  
+Este paradigma lo utilizamos porque es muy fácil encapsular datos de esta forma y permitir la herencia entre sus objetos.
+
 ### Veamos el concepto de clase en JavaScript, pilar de este tipo de programación.
 Una clase o prototipo en JavaScript se crea con la palabra reservada _class_ seguido del nombre de la clasecon letra capital. Y dentro puede contener los atributo y méotodos. 
 ```
@@ -323,10 +320,41 @@ Estos dos obejots serán diferentes y tendrán dos nombres diferentes aunque ven
 spiderMan.saludar();    //Hola, soy Peter Parker y tengo este poder: saco fotos a Spider-man.
 batman.saludar();       //Hola, soy Bruce Wayne y tengo este poder: voy de fiesta en fiesta.
 ```
-Así, resumiendo, la programación orientada a objetos nos permite definir unas plantillas que heredarán unos compportamientos y con las que podremos crear (instanciar) nuestros objetos.
+Así resumiendo, la programación orientada a objetos nos permite definir unas plantillas que heredarán unos compportamientos y con las que podremos crear (instanciar) nuestros objetos.
 
 
 ## ¿Qué es una promesa en JS?
+Son objetos para trabajar con operaciones asíncronas que nos permiten confirmar si han tenido éxito o fracaso. Por ejemplo, si tenemos una aplicación que recoge datos de una API externa, mientras le lleguen datos no tendrá ningún problema pero si el algún momento la API falla, sólo tendremos un error sin la razón. En cambio con las promesas, tenemos dos posibles escenarios, que la petición sea resuelta o rechazada, por lo que si falla, el rechazo nos permitirá tener una forma de control.  
+
+Veamos su sintáxis básica. Se compone de una expresión con el constructor _Promise_ y los dos argumentos posibles.
+```
+let promise = new Promise((resolve, reject) => {
+  // código a ejecutar
+});
+```
+En el código realizaríamos el control del _resolve_ y _reject_. Aquí un sencillo ejemplo de ese código que a los tres segundos devuelve una frase según el resultado.
+```
+setTimeout(() => {
+    resolve('He resuelto.')
+  }, 3000);
+
+setTimeout(() => {
+    reject(Error('He rechazado.'))
+  }, 3000);
+```
+De esta forma, si queremos mostrar su resultado, utilizaríamos la variable seguida de _.then_ para el caso de éxito y _.catch_ para el erróneo.
+```
+promise
+  .then((resultado) => {
+    console.log(resultado);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+```
+Es un ejemplo en el que siempre tenemos un resultado positivo pero si comentamos el resolve del código a jecutar, veríamos como el resultado sería el de error.
+
+
 
 ## ¿Qué hacen async y await por nosotros?
 
