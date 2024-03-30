@@ -251,6 +251,37 @@ let jugadorDos = 'Batman';
 Son este ejemplo, somos capaces de intercambiar los valores de dos variables en una sola línea con un simple intercambio de orden.
 
 ## ¿Qué hace el operador de extensión en JS?
+Entiendo que hablamos del operador _Spread_, que es una forma de propgación de elementos desde _arryas_, cadenas y objetos. Como he mencionado, su sintaxis es la de una variable precedida de (...), pero antes los hemos usado para deconstruir y ahora lo analizaremos en la combinación.  
+Con él podemos combinar _arrays_ y objetos sin tener en cuenta el número de elementos que los conforman. Para el primer caso puede ser un _array_ con otro elemento o dos _arrays_.  
+```
+//Combinar arrays
+const numerosUno = [1, 2];
+const numerosDos = [4, 5];
+const combinado = [...numerosUno, ...numerosDos]; //Dará de resultado un array con todos los números.
+
+// Añadir elemento
+const arrayCopia = [...combinado, 6];             //Añdaimos el número 6 al array anterior.
+```
+En el caso de objetos podemos también combinarlos:
+```
+const name1 = { name: 'Peter' };
+const name2 = { surname:'Parker'};
+
+const fullName = { ...name1, ...name2 };
+```
+O clonarlos:
+```
+const fullName2 = { ...fullName };
+```
+Otra opción interesante es la de su uso en funciones. En el siguiente ejemplo podemos ir pasando todos los valores del _array_.
+```
+const operandos = [1, 2, 3];
+
+const suma = (a, b, c) => a + b + c;
+
+console.log(suma(...operandos));
+```
+
 
 ## ¿Qué es la programación orientada a objetos?
 
