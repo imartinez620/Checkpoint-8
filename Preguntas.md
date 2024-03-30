@@ -284,6 +284,47 @@ console.log(suma(...operandos));
 
 
 ## ¿Qué es la programación orientada a objetos?
+Es un paradigma que se basa en la creación de objetos que tendrán unas propiedas o datos del objeto, y unas funciones o comportamientos. En las primeras versiones de JavaScript no se seguía este paradigma, pero fue incluido posteriormente. De forma sencilla, su sistema se basa en unas plantillas llamadas clases, que definen los puntos mencionados, y en un concepto llamado instancia, que se basa en contruir el objeto conforme a la clase. Proceso en el que es típico poder darle valores en su constructor, y que luego admitirá manejarlo según su comportamiento.  
+### Veamos el concepto de clase en JavaScript, pilar de este tipo de programación.
+Una clase o prototipo en JavaScript se crea con la palabra reservada _class_ seguido del nombre de la clasecon letra capital. Y dentro puede contener los atributo y méotodos. 
+```
+class Heroe {
+  this.nombre;
+  this.poder;
+
+  presentarse(){
+
+  }
+}
+```
+Pero por sí sola no hace nada, sólo es una plantilla. Para poder elaborar objetos con ella, tenemos que incluir el concepto de *constructor*. Que es la forma que tenemos de instanciar esta clase. 
+```
+class Heroe {
+  constructor(nombre, poder) {
+    this.nombre = nombre;
+    this.poder = poder;
+  }
+
+  saludar() {
+    console.log(`Hola, soy ${this.nombre} y tengo este poder: ${this.poder}.`);
+  }
+}
+```
+
+### Instanciación de objetos
+Teniendo definida la clase, sólo necesitamos crear tantos objetos diferentes como queramos, cada uno con sus caraterísticas y respuestas concretas. Vamos a crear un par de héroes. Utilizaremos la palabra clave _new_:
+```
+const spiderMan = new Heroe('Peter Parker', 'saco fotos a Spider-man');
+const batman = new Heroe('Bruce Wayne', 'voy de fiesta en fiesta');
+```
+
+Estos dos obejots serán diferentes y tendrán dos nombres diferentes aunque vengan de la misma clase, pero heredarán un método común que devolverá un resultado también diferente. Si pedimos que saluden llamando al método mientras la sintaxis de _objeto.metodo()_, el resultado será el siguiente:
+```
+spiderMan.saludar();    //Hola, soy Peter Parker y tengo este poder: saco fotos a Spider-man.
+batman.saludar();       //Hola, soy Bruce Wayne y tengo este poder: voy de fiesta en fiesta.
+```
+Así, resumiendo, la programación orientada a objetos nos permite definir unas plantillas que heredarán unos compportamientos y con las que podremos crear (instanciar) nuestros objetos.
+
 
 ## ¿Qué es una promesa en JS?
 
