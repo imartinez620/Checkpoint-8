@@ -174,8 +174,52 @@ No se recomienda el uso de *var* por los problemas asociados a sus reasignacione
 
 
 ## ¿Qué es una función de flecha?
+Una función flecha es una forma más concisa y compacta de declarar funciones en JavaScript. De esta forma generan un código más fácil de leer y que incluso puede verse reducido a una única línea.  
+El formato clásico para realizar una expresión sería el siguiente:
+```
+let funcion = function(arg) {
+  return codigo;
+};
+```
+Si lo reducimos a una función flecha, quedaría de la siguiente manera:
+```
+let funcion = (arg) => codigo;
+```
+Donde funcion representa la variable a la que se le asigna un resultado, quiere decir que el _return_ está implícito para cuando la llamemos _funcion(arg);_. La propia función serían los (), con o sin argumentos, y el código iría representado después de la 'flecha' =>.    
+El ejemplo mostrado es una opción simple en una sóla línea, pero también admiten el uso de llaves {} para configuraciones multi línea. Aunque deberemos incluir esta vez la palabra clave _return_.
+```
+let nombre = (a, b) => {  
+  let fullName = `${b}, ${a}`;
+  return fullName; 
+};
+
+console.log( nombre('Peter', 'Parker') ); 
+```
+En el caso de utilizar funciones flecha que no tengan argumentos, tendremos que seguir utlizando los paréntesis en su llamada:  
+```
+holaMundo = () => console.log("Hola Peter");
+holaMundo();
+```
+En este punto, te habrás dado cuenta de que las funciones arroy son anónimas, lo que generea problemas con la depuración al no tener un nombre que buscar, y con la autorreferencia, generando incompatibilidades con la recursión.  
+Finalmente, otra de las ventajas es la relativa al uso de la palabra reservada _this_. Su uso en funciones arrow no se refiere al objeto, sino al ámbito léxico superior, en otras palabras, al que heredan, y no son adecuadas para hacer referencia al mismo objeto que forman, por lo que no son la mejor opción en estas situaciones.
+```
+const objeto = {
+  nombre: 'Peter',
+  decirHola: function() {
+    console.log(`Hola, soy ${this.nombre}`);
+  },
+  decirHolaArrow: () => {
+    console.log(`Hola, soy ${this.nombre}`);
+  }
+};
+
+objeto.decirHola();         // Output: Hola, soy Peter
+objeto.decirHolaArrow();    // Output: Hola, soy undefined
+```
 
 ## ¿Qué es la deconstrucción de variables?
+
+
 
 ## ¿Qué hace el operador de extensión en JS?
 
