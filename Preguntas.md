@@ -37,6 +37,8 @@ for (var i = 0; i < week.length; i++) {   //Sale del bucle cuando i=7 (tamaño d
   console.log(week[i]); 
 }
 ```
+![Resultado bucle días de la semana](/images/Captura%20de%20pantalla%20(12406).png)
+
 Las opciones actualizadas de este bucle delegan este control de elementos a un sistema más automático. No tenemos que estar pendiente del comparador que nos pueda causar problemas de indexar fuera del _array_. 
 
 ```
