@@ -277,7 +277,7 @@ const suma = (a, b, c) => a + b + c;
 
 console.log(suma(...operandos));
 ```
-
+![Resultado](/images/Captura%20de%20pantalla%20(12407).png)
 
 ## ¿Qué es la programación orientada a objetos?
 Es un paradigma que se basa en la creación de objetos que tendrán unas propiedas o datos del objeto, y unas funciones o comportamientos. En las primeras versiones de JavaScript no se seguía este paradigma, pero fue incluido posteriormente. De forma sencilla, su sistema se basa en unas plantillas llamadas clases, que definen los puntos mencionados, y en un concepto llamado instancia, que se basa en contruir el objeto conforme a la clase. Proceso en el que es típico poder darle valores en su constructor, y que luego admitirá manejarlo según su comportamiento.  
