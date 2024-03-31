@@ -388,5 +388,5 @@ async function doorActivities() {
 
 doorActivities();
 ```
-Si por el motivo que sea, nos genera dudas de que tengamos un control, podemos incluso reducir el tiempo de espera de la segunda promesa a un segundo, y aún así, seguiría el mismo orden de llegada.
+Si por el motivo que sea, nos genera dudas de que tengamos un control, podemos incluso reducir el tiempo de espera de la segunda promesa a un segundo, y aún así, seguiría el mismo orden de llegada.  
 ![Imagen ejemplo](/images/Captura%20de%20pantalla%20(12393).png)
