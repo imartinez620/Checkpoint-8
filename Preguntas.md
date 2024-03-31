@@ -357,13 +357,36 @@ Es un ejemplo en el que siempre tenemos un resultado positivo pero si comentamos
 
 
 ## ¿Qué hacen async y await por nosotros?
+Uno de los problemas que se empezaron a tener con las promesas era que cuando tenías un sistema más complejo con varias de ellas en paralelo o anidadas, éstas empezaban a desordenarse. Con _async_ y _await_ conseguimos tener un control más cristalino y eficiente del orden, y podemos recibir estos callbacks en el orden deseado.  
+Veamos un ejemplo sincronizando dos promesas. Supongamos un caso hipotético en el que necesitamos abrir y cerrar una puerta. Como podemos imaginar, para cerrarla tiene que esta abierta, y para abrila tienes que cerrarla antes. Así que sus promesas serían las siguientes:
+```
+const open = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('La puerta se ha abierto...');
+    }, 2000);
+  });
+}
 
+const close = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('La puerta se ha cerrado...');
+    }, 2000);
+  });
+}
+```
+Las dos tienen en el mismo tiempo de retardo de 2 segundos, y puede ocurrir incluso que llegue antes una respuesta del segundo que del primero. ¿Cómo podemos hacer que la de cierre se ejecute después de la de apertura? Pues generando una función que sincronice los procesos, no es más que una función con la plabra reservada _async_ delante y con las dos llamadas a las promesas anteriores en orden, pero con la palabra reservada _await_, que obligará a parar la ejecución secuencial del código hasta que tengamos su respuesta.
+```
+async function doorActivities() {
+  const returnedOpen = await open();
+  console.log(returnedOpen);
 
+  const returnedClose = await close();
+  console.log(returnedClose);
+}
 
-Y por último debes realizar el siguiente ejercicio práctico, y subirlo a tu repositorio en Git-Hub para revisarlo
-
--Cree un bucle for en JS que imprima cada nombre en esta lista. miLista = “velma”, “exploradora”, “jane”, “john”, “harry”
-
--Cree un bucle while que recorra la misma lista y también imprima los nombres. Nota: Recuerda crear un contador para que el ciclo no sea infinito.
-
--Cree una función de flecha que devuelva "Hola mundo".
+doorActivities();
+```
+Si por el motivo que sea, nos genera dudas de que tengamos un control, podemos incluso reducir el tiempo de espera de la segunda promesa a un segundo, y aún así, seguiría el mismo orden de llegada.
+![Imagen ejemplo](/images/Captura%20de%20pantalla%20(12393).png)
