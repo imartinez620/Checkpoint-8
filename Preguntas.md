@@ -16,7 +16,6 @@ for (var i = 0; i < 10; i++){       //Se puede realizar en sentido inverso, fija
     //Código que se ejecuta 10 veces.
     //Se para cuando _i_ alcanza el valor de 10.
 }
-
 ```
 
 Para el caso derecorrer un _array_, sólo tendremos que poner en la condición el número de elementos del _array_. Veamos un ejemplo que completaremos con las variantes del bucle *FOR* pensadas para este caso.  
@@ -352,12 +351,51 @@ promise
     console.error(error);
   });
 ```
-Es un ejemplo en el que siempre tenemos un resultado positivo pero si comentamos el resolve del código a jecutar, veríamos como el resultado sería el de error.
+Es un ejemplo en el que siempre tenemos un resultado positivo pero si comentamos el resolve del código a ejecutar, veríamos como el resultado sería el de error. 
 
+### Comunicaciones con sitios externos APIs y el uso de fetch
+Una de las situacines más típicas del uso de promesas es la comunicación con APIs externas para recoger sus datos. Esto se realiza usando la llamada _fetch()_ que nos traerá una promesa como respuesta. El ejemplo sencillo de consulta e impresión por consola del objeto que nos devuelve sería:
+```
+const postsPromise = fetch(url)
+console.log(postsPromise);
+```
+Pero esto no resulta muy intiutivo de analizar ni entender. Los datos recibidos no tienen un formato muy amigable.Por lo que realizaremos dos post operaciones adicionales con la palabra reservada _then_:
+```
+postPromise
+  .then(data => data.json())
+  .then(data => {
+    console.log(data);
+  })
+```
+Así hemos transformado los datos en formato _json_ y los mostramos por consola y podríamos acceder a cada elemento como títulos, enlaces o contenidos según queramos con pocas instrucciones como:
+```
+.then(data => {
+    data.posts.forEach((item) => {
+      console.log(item.title);    //content, posts_links, etc...
+    });
+```
+Por último, comentar que también podemos visualizar errores si añadimos también un _catch(error)_:
+```
+.catch((err) => {
+  console.log(err);       //Mostraría en pantalla el fallo que queramos indicar relacionado con la promesa del fetch.
+});
+```
+### Agrupación de promesas
+Una opción interesante es la posibilidad de ver todas las respuestas de nuestras promesas a la vez. Imaginemos que tenemos varias y necesitamos su impresión en consola en grupo, podemos crear una expresión que agrupa las promesas. Seguido, utilizamos la variable asignada con la opción _then_ que hemos aprendido para obtener el objeto. Veamos el código que añadiríamos.
+```
+const loginActivities = Promise.all([promesaUno, promesaDos]);
+
+loginActivities.then(res => {
+  res.forEach(activity => {
+    console.log(activity);    //Imprime en pantalla el resultado de cada una.
+  })
+})
+```
+En esta opción realizamos un bucle que recorre el resultado obtenido de cada promesa. 
 
 
 ## ¿Qué hacen async y await por nosotros?
-Uno de los problemas que se empezaron a tener con las promesas era que cuando tenías un sistema más complejo con varias de ellas en paralelo o anidadas, éstas empezaban a desordenarse. Con _async_ y _await_ conseguimos tener un control más cristalino y eficiente del orden, y podemos recibir estos callbacks en el orden deseado.  
+Uno de los problemas que se empezaron a tener con las promesas era que cuando tenías un sistema más complejo con varias de ellas en paralelo o anidadas, éstas empezaban a desordenarse. Con _async_ y _await_ conseguimos tener un control más cristalino y eficiente del orden, y podemos recibir estos callbacks en el orden deseado. De esta forma nos genera un código más fácil de comprender y con una apariencia síncrona aunque tenga una naturaleza asíncrona.    
 Veamos un ejemplo sincronizando dos promesas. Supongamos un caso hipotético en el que necesitamos abrir y cerrar una puerta. Como podemos imaginar, para cerrarla tiene que esta abierta, y para abrila tienes que cerrarla antes. Así que sus promesas serían las siguientes:
 ```
 const open = () => {
@@ -376,7 +414,7 @@ const close = () => {
   });
 }
 ```
-Las dos tienen en el mismo tiempo de retardo de 2 segundos, y puede ocurrir incluso que llegue antes una respuesta del segundo que del primero. ¿Cómo podemos hacer que la de cierre se ejecute después de la de apertura? Pues generando una función que sincronice los procesos, no es más que una función con la plabra reservada _async_ delante y con las dos llamadas a las promesas anteriores en orden, pero con la palabra reservada _await_, que obligará a parar la ejecución secuencial del código hasta que tengamos su respuesta.
+Las dos tienen en el mismo tiempo de retardo de 2 segundos, y puede ocurrir incluso que llegue antes una respuesta del segundo que del primero. ¿Cómo podemos hacer que la de cierre se ejecute después de la de apertura? Pues generando una función que sincronice los procesos, no es más que una función con la plabra reservada _async_ delante y con las dos llamadas a las promesas anteriores en orden, pero con la palabra reservada _await_, que obligará a parar la ejecución secuencial del código hasta que tengamos su respuesta. Resaltar que la palabra reservada _await_ tiene un uso exclusivo en funciones _async_.
 ```
 async function doorActivities() {
   const returnedOpen = await open();
@@ -390,3 +428,44 @@ doorActivities();
 ```
 Si por el motivo que sea, nos genera dudas de que tengamos un control, podemos incluso reducir el tiempo de espera de la segunda promesa a un segundo, y aún así, seguiría el mismo orden de llegada.  
 ![Imagen ejemplo](/images/Captura%20de%20pantalla%20(12393).png)
+
+Si por el motivo que consideremos, queremos ver el resultado de todos los procesos a la vez aunque se ejecuten en sus respectivos tiempos, podemos hacerlo utilizando las funciones como argumentos.
+```
+async function doorActivities(open, close) {
+  const returnedLogin = await open;
+  console.log(returnedLogin);
+
+  const returnedUpdateAccount = await close;
+  console.log(returnedUpdateAccount);
+}
+
+doorActivities(open(), close());
+```
+
+Otro uso interesante, es controlar cuando nos serán devueltos los datos cuando trabajamos con APIs externas. Como indicamos antes, lo que hacen es sincronizar, así que es útil cuando realizamos varias promesas de llamadas a APIs. Así que utilizando nuevamente la palabra reservada _async_ en la función y la de _await_ en la respuesta de cada consulta, podremos esperar a ejecutar la segunda promesa cuando la primera nos haya devuelto los datos.
+```
+async function consultaApis() {
+  const postsPromise = fetch(url);
+  const posts = await postsPromise.then(...operaciones...);
+  ...
+
+  //Hasta no terminar la primera consulta, no continuaremos con esta otra
+  const reposPromise = fetch(url);  
+  const repos = await reposPromise.then(...operaciones...);
+  ...
+}
+```
+Por último, vamos a ver que también nos pueden facilitar el control de errores cuando realizamos consultas a APIs. La jugada sería encapsular la consulta con _try_ y posteriormente añadir un _catch_ con el error que queramos que nos informe.
+```
+...
+try{
+  const postsPromise = fetch(url);
+  const posts = await postsPromise.then(...operaciones...);
+  ...
+}catch{
+  console.log(err);
+  console.log('Hay un error con la url solicitada.');
+}
+...
+```
+De esta forma tenemos más control, además de la sincronización, avisamos dónde ha fallado con el mensaje que queramos.
