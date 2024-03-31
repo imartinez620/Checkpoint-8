@@ -354,6 +354,7 @@ promise
   });
 ```
 Es un ejemplo en el que siempre tenemos un resultado positivo pero si comentamos el resolve del código a ejecutar, veríamos como el resultado sería el de error. 
+![Prueba de error](/images/Captura%20de%20pantalla%20(12409).png)
 
 ### Comunicaciones con sitios externos APIs y el uso de fetch
 Una de las situacines más típicas del uso de promesas es la comunicación con APIs externas para recoger sus datos. Esto se realiza usando la llamada _fetch()_ que nos traerá una promesa como respuesta. El ejemplo sencillo de consulta e impresión por consola del objeto que nos devuelve sería:
